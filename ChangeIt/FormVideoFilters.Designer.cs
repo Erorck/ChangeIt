@@ -1,7 +1,7 @@
 ﻿
 namespace ChangeIt
 {
-    partial class FormImageFilters
+    partial class FormVideoFilters
     {
         /// <summary>
         /// Required designer variable.
@@ -31,13 +31,12 @@ namespace ChangeIt
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelHistogram = new System.Windows.Forms.Panel();
-            this.btnSaveImage = new FontAwesome.Sharp.IconButton();
             this.cbSelectedFilter = new System.Windows.Forms.ComboBox();
             this.btnResetImage = new FontAwesome.Sharp.IconButton();
             this.btnApplyFilter = new FontAwesome.Sharp.IconButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnUploadImage = new FontAwesome.Sharp.IconButton();
+            this.btnUploadVideo = new FontAwesome.Sharp.IconButton();
             this.pbEdited = new System.Windows.Forms.PictureBox();
             this.pBOriginal = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
@@ -49,20 +48,19 @@ namespace ChangeIt
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(85)))));
             this.panel1.Controls.Add(this.panelHistogram);
-            this.panel1.Controls.Add(this.btnSaveImage);
             this.panel1.Controls.Add(this.cbSelectedFilter);
             this.panel1.Controls.Add(this.btnResetImage);
             this.panel1.Controls.Add(this.btnApplyFilter);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnUploadImage);
+            this.panel1.Controls.Add(this.btnUploadVideo);
             this.panel1.Controls.Add(this.pbEdited);
             this.panel1.Controls.Add(this.pBOriginal);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1097, 480);
-            this.panel1.TabIndex = 0;
+            this.panel1.Size = new System.Drawing.Size(1097, 450);
+            this.panel1.TabIndex = 1;
             // 
             // panelHistogram
             // 
@@ -70,29 +68,8 @@ namespace ChangeIt
             this.panelHistogram.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelHistogram.Location = new System.Drawing.Point(814, 0);
             this.panelHistogram.Name = "panelHistogram";
-            this.panelHistogram.Size = new System.Drawing.Size(283, 480);
-            this.panelHistogram.TabIndex = 17;
-            // 
-            // btnSaveImage
-            // 
-            this.btnSaveImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.btnSaveImage.FlatAppearance.BorderSize = 0;
-            this.btnSaveImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
-            this.btnSaveImage.IconChar = FontAwesome.Sharp.IconChar.Download;
-            this.btnSaveImage.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
-            this.btnSaveImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnSaveImage.IconSize = 32;
-            this.btnSaveImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveImage.Location = new System.Drawing.Point(610, 418);
-            this.btnSaveImage.Name = "btnSaveImage";
-            this.btnSaveImage.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnSaveImage.Size = new System.Drawing.Size(147, 40);
-            this.btnSaveImage.TabIndex = 16;
-            this.btnSaveImage.Text = "Save Edited Image";
-            this.btnSaveImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSaveImage.UseVisualStyleBackColor = false;
+            this.panelHistogram.Size = new System.Drawing.Size(283, 450);
+            this.panelHistogram.TabIndex = 18;
             // 
             // cbSelectedFilter
             // 
@@ -171,33 +148,33 @@ namespace ChangeIt
             this.label1.TabIndex = 10;
             this.label1.Text = "Original";
             // 
-            // btnUploadImage
+            // btnUploadVideo
             // 
-            this.btnUploadImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
-            this.btnUploadImage.FlatAppearance.BorderSize = 0;
-            this.btnUploadImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUploadImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
-            this.btnUploadImage.IconChar = FontAwesome.Sharp.IconChar.Upload;
-            this.btnUploadImage.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
-            this.btnUploadImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnUploadImage.IconSize = 32;
-            this.btnUploadImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUploadImage.Location = new System.Drawing.Point(43, 367);
-            this.btnUploadImage.Name = "btnUploadImage";
-            this.btnUploadImage.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnUploadImage.Size = new System.Drawing.Size(160, 40);
-            this.btnUploadImage.TabIndex = 11;
-            this.btnUploadImage.Text = "Upload Image";
-            this.btnUploadImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUploadImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUploadImage.UseVisualStyleBackColor = false;
+            this.btnUploadVideo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.btnUploadVideo.FlatAppearance.BorderSize = 0;
+            this.btnUploadVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUploadVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.btnUploadVideo.IconChar = FontAwesome.Sharp.IconChar.Upload;
+            this.btnUploadVideo.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.btnUploadVideo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnUploadVideo.IconSize = 32;
+            this.btnUploadVideo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUploadVideo.Location = new System.Drawing.Point(43, 367);
+            this.btnUploadVideo.Name = "btnUploadVideo";
+            this.btnUploadVideo.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnUploadVideo.Size = new System.Drawing.Size(160, 40);
+            this.btnUploadVideo.TabIndex = 11;
+            this.btnUploadVideo.Text = "Upload Video";
+            this.btnUploadVideo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUploadVideo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUploadVideo.UseVisualStyleBackColor = false;
             // 
             // pbEdited
             // 
             this.pbEdited.Location = new System.Drawing.Point(442, 43);
             this.pbEdited.Name = "pbEdited";
             this.pbEdited.Size = new System.Drawing.Size(315, 254);
-            this.pbEdited.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbEdited.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbEdited.TabIndex = 9;
             this.pbEdited.TabStop = false;
             // 
@@ -206,18 +183,18 @@ namespace ChangeIt
             this.pBOriginal.Location = new System.Drawing.Point(43, 43);
             this.pBOriginal.Name = "pBOriginal";
             this.pBOriginal.Size = new System.Drawing.Size(315, 254);
-            this.pBOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBOriginal.TabIndex = 8;
             this.pBOriginal.TabStop = false;
             // 
-            // FormImageFilters
+            // FormVideoFilters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 480);
+            this.ClientSize = new System.Drawing.Size(1097, 450);
             this.Controls.Add(this.panel1);
-            this.Name = "FormImageFilters";
-            this.Text = "FormImageFilters";
+            this.Name = "FormVideoFilters";
+            this.Text = "FormVideoFilters";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).EndInit();
@@ -234,10 +211,9 @@ namespace ChangeIt
         private FontAwesome.Sharp.IconButton btnApplyFilter;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private FontAwesome.Sharp.IconButton btnUploadImage;
+        private FontAwesome.Sharp.IconButton btnUploadVideo;
         private System.Windows.Forms.PictureBox pbEdited;
         private System.Windows.Forms.PictureBox pBOriginal;
-        private FontAwesome.Sharp.IconButton btnSaveImage;
         private System.Windows.Forms.Panel panelHistogram;
     }
 }

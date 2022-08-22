@@ -40,11 +40,14 @@ namespace ChangeIt
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.panelShadow = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnChangeIt)).BeginInit();
             this.panelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
+            this.panelDesktop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -57,7 +60,7 @@ namespace ChangeIt
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(220, 535);
+            this.panelMenu.Size = new System.Drawing.Size(220, 581);
             this.panelMenu.TabIndex = 0;
             // 
             // BtnCamera
@@ -154,7 +157,7 @@ namespace ChangeIt
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(848, 75);
+            this.panelTitleBar.Size = new System.Drawing.Size(767, 75);
             this.panelTitleBar.TabIndex = 1;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
@@ -188,23 +191,36 @@ namespace ChangeIt
             this.panelShadow.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelShadow.Location = new System.Drawing.Point(220, 75);
             this.panelShadow.Name = "panelShadow";
-            this.panelShadow.Size = new System.Drawing.Size(848, 9);
+            this.panelShadow.Size = new System.Drawing.Size(767, 9);
             this.panelShadow.TabIndex = 2;
             // 
             // panelDesktop
             // 
             this.panelDesktop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(85)))));
+            this.panelDesktop.Controls.Add(this.pictureBox1);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(220, 84);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(848, 451);
+            this.panelDesktop.Size = new System.Drawing.Size(767, 497);
             this.panelDesktop.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = global::ChangeIt.Properties.Resources.ChangeIt_Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(210, 126);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(331, 199);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // FormHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1068, 535);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(987, 581);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelShadow);
             this.Controls.Add(this.panelTitleBar);
@@ -217,6 +233,8 @@ namespace ChangeIt
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
+            this.panelDesktop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -234,6 +252,7 @@ namespace ChangeIt
         private System.Windows.Forms.Label lblTitleChildForm;
         private System.Windows.Forms.Panel panelShadow;
         private System.Windows.Forms.Panel panelDesktop;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

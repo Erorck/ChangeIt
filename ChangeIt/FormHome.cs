@@ -86,7 +86,7 @@ namespace ChangeIt
 
         private void OpenChildForm(Form childForm)
         {
-            if (childForm != null)
+            if (currentChildForm != null)
             {
                 //open only one form
                 currentChildForm.Close();
@@ -99,26 +99,34 @@ namespace ChangeIt
             panelDesktop.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            lblTitleChildForm.Text = childForm.Text;
+            //childForm.Size = panelDesktop.Size;
+            lblTitleChildForm.Text = currentBtn.Text;
         }
 
         private void IconButton1_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.cYellow);
+            this.Size = new Size(220 + 1097, 500 + 81);
+            OpenChildForm(new FormImageFilters());
         }
 
         private void BtnVideoFilters_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.cYellow);
+            this.Size = new Size(220 + 1097, 460 + 81);
+            OpenChildForm(new FormVideoFilters());
         }
 
         private void BtnCamera_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.cYellow);
+            this.Size = new Size(220 + 644, 499 + 81);
+            OpenChildForm(new FormCameraUtilities());
         }
 
         private void btnChangeIt_Click(object sender, EventArgs e)
         {
+            currentChildForm.Close();
             Reset();
         }
 
