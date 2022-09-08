@@ -113,7 +113,7 @@ namespace ChangeIt
         private void BtnVideoFilters_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.cYellow);
-            this.Size = new Size(220 + 1097, 460 + 81);
+            this.Size = new Size(220 + 1097, 490 + 81);
             OpenChildForm(new FormVideoFilters());
         }
 
@@ -152,6 +152,24 @@ namespace ChangeIt
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void iPbClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void iPbMaximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+                WindowState = FormWindowState.Maximized;
+            else            
+                WindowState = FormWindowState.Normal;
+        }
+
+        private void iPbMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

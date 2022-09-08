@@ -36,6 +36,10 @@ namespace ChangeIt
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnChangeIt = new System.Windows.Forms.PictureBox();
             this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.iPbClose = new FontAwesome.Sharp.IconPictureBox();
+            this.iPbMaximize = new FontAwesome.Sharp.IconPictureBox();
+            this.iPbMinimize = new FontAwesome.Sharp.IconPictureBox();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.panelShadow = new System.Windows.Forms.Panel();
@@ -45,6 +49,10 @@ namespace ChangeIt
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnChangeIt)).BeginInit();
             this.panelTitleBar.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iPbClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPbMaximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPbMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
             this.panelDesktop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -152,6 +160,7 @@ namespace ChangeIt
             // panelTitleBar
             // 
             this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.panelTitleBar.Controls.Add(this.panel1);
             this.panelTitleBar.Controls.Add(this.lblTitleChildForm);
             this.panelTitleBar.Controls.Add(this.iconCurrentChildForm);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -160,6 +169,65 @@ namespace ChangeIt
             this.panelTitleBar.Size = new System.Drawing.Size(767, 75);
             this.panelTitleBar.TabIndex = 1;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.iPbClose);
+            this.panel1.Controls.Add(this.iPbMaximize);
+            this.panel1.Controls.Add(this.iPbMinimize);
+            this.panel1.Location = new System.Drawing.Point(668, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(99, 34);
+            this.panel1.TabIndex = 3;
+            // 
+            // iPbClose
+            // 
+            this.iPbClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.iPbClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iPbClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.iPbClose.IconChar = FontAwesome.Sharp.IconChar.XmarkSquare;
+            this.iPbClose.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.iPbClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iPbClose.IconSize = 29;
+            this.iPbClose.Location = new System.Drawing.Point(61, 4);
+            this.iPbClose.Name = "iPbClose";
+            this.iPbClose.Size = new System.Drawing.Size(32, 29);
+            this.iPbClose.TabIndex = 4;
+            this.iPbClose.TabStop = false;
+            this.iPbClose.Click += new System.EventHandler(this.iPbClose_Click);
+            // 
+            // iPbMaximize
+            // 
+            this.iPbMaximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.iPbMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iPbMaximize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.iPbMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
+            this.iPbMaximize.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.iPbMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iPbMaximize.IconSize = 29;
+            this.iPbMaximize.Location = new System.Drawing.Point(29, 5);
+            this.iPbMaximize.Name = "iPbMaximize";
+            this.iPbMaximize.Size = new System.Drawing.Size(36, 29);
+            this.iPbMaximize.TabIndex = 3;
+            this.iPbMaximize.TabStop = false;
+            this.iPbMaximize.Click += new System.EventHandler(this.iPbMaximize_Click);
+            // 
+            // iPbMinimize
+            // 
+            this.iPbMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.iPbMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iPbMinimize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.iPbMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.iPbMinimize.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
+            this.iPbMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iPbMinimize.IconSize = 29;
+            this.iPbMinimize.Location = new System.Drawing.Point(0, 4);
+            this.iPbMinimize.Name = "iPbMinimize";
+            this.iPbMinimize.Size = new System.Drawing.Size(32, 29);
+            this.iPbMinimize.TabIndex = 2;
+            this.iPbMinimize.TabStop = false;
+            this.iPbMinimize.Click += new System.EventHandler(this.iPbMinimize_Click);
             // 
             // lblTitleChildForm
             // 
@@ -232,6 +300,10 @@ namespace ChangeIt
             ((System.ComponentModel.ISupportInitialize)(this.btnChangeIt)).EndInit();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.iPbClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPbMaximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPbMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
             this.panelDesktop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -253,6 +325,10 @@ namespace ChangeIt
         private System.Windows.Forms.Panel panelShadow;
         private System.Windows.Forms.Panel panelDesktop;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel1;
+        private FontAwesome.Sharp.IconPictureBox iPbMinimize;
+        private FontAwesome.Sharp.IconPictureBox iPbClose;
+        private FontAwesome.Sharp.IconPictureBox iPbMaximize;
     }
 }
 

@@ -40,14 +40,17 @@ namespace ChangeIt
             this.btnUploadImage = new FontAwesome.Sharp.IconButton();
             this.pbEdited = new System.Windows.Forms.PictureBox();
             this.pBOriginal = new System.Windows.Forms.PictureBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(85)))));
+            this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.panelHistogram);
             this.panel1.Controls.Add(this.btnSaveImage);
             this.panel1.Controls.Add(this.cbSelectedFilter);
@@ -210,6 +213,13 @@ namespace ChangeIt
             this.pBOriginal.TabIndex = 8;
             this.pBOriginal.TabStop = false;
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(428, 413);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 20;
+            // 
             // FormImageFilters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -222,6 +232,7 @@ namespace ChangeIt
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -239,5 +250,6 @@ namespace ChangeIt
         private System.Windows.Forms.PictureBox pBOriginal;
         private FontAwesome.Sharp.IconButton btnSaveImage;
         private System.Windows.Forms.Panel panelHistogram;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }

@@ -30,6 +30,7 @@ namespace ChangeIt
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panelHistogram = new System.Windows.Forms.Panel();
             this.cbSelectedFilter = new System.Windows.Forms.ComboBox();
             this.btnResetImage = new FontAwesome.Sharp.IconButton();
@@ -40,6 +41,7 @@ namespace ChangeIt
             this.pbEdited = new System.Windows.Forms.PictureBox();
             this.pBOriginal = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +49,7 @@ namespace ChangeIt
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(85)))));
+            this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.panelHistogram);
             this.panel1.Controls.Add(this.cbSelectedFilter);
             this.panel1.Controls.Add(this.btnResetImage);
@@ -59,8 +62,15 @@ namespace ChangeIt
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1097, 450);
+            this.panel1.Size = new System.Drawing.Size(1097, 494);
             this.panel1.TabIndex = 1;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(430, 415);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 19;
             // 
             // panelHistogram
             // 
@@ -68,7 +78,7 @@ namespace ChangeIt
             this.panelHistogram.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelHistogram.Location = new System.Drawing.Point(814, 0);
             this.panelHistogram.Name = "panelHistogram";
-            this.panelHistogram.Size = new System.Drawing.Size(283, 450);
+            this.panelHistogram.Size = new System.Drawing.Size(283, 494);
             this.panelHistogram.TabIndex = 18;
             // 
             // cbSelectedFilter
@@ -191,12 +201,13 @@ namespace ChangeIt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 450);
+            this.ClientSize = new System.Drawing.Size(1097, 494);
             this.Controls.Add(this.panel1);
             this.Name = "FormVideoFilters";
             this.Text = "FormVideoFilters";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).EndInit();
             this.ResumeLayout(false);
@@ -215,5 +226,6 @@ namespace ChangeIt
         private System.Windows.Forms.PictureBox pbEdited;
         private System.Windows.Forms.PictureBox pBOriginal;
         private System.Windows.Forms.Panel panelHistogram;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
