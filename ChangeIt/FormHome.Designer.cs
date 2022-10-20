@@ -206,7 +206,7 @@ namespace ChangeIt
             this.iPbMaximize.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(142)))), ((int)(((byte)(156)))));
             this.iPbMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iPbMaximize.IconSize = 29;
-            this.iPbMaximize.Location = new System.Drawing.Point(29, 5);
+            this.iPbMaximize.Location = new System.Drawing.Point(29, 4);
             this.iPbMaximize.Name = "iPbMaximize";
             this.iPbMaximize.Size = new System.Drawing.Size(36, 29);
             this.iPbMaximize.TabIndex = 3;

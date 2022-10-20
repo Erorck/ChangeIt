@@ -57,7 +57,6 @@ namespace ChangeIt
             this.pBVideoPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBVideoPreview.TabIndex = 8;
             this.pBVideoPreview.TabStop = false;
-            this.pBVideoPreview.Click += new System.EventHandler(this.pBVideoPreview_Click);
             // 
             // btnTurnOn
             // 
@@ -111,7 +110,7 @@ namespace ChangeIt
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.label3.Location = new System.Drawing.Point(593, 66);
+            this.label3.Location = new System.Drawing.Point(599, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 19);
             this.label3.TabIndex = 17;
@@ -119,21 +118,22 @@ namespace ChangeIt
             // 
             // lblDetectedUsers
             // 
-            this.lblDetectedUsers.AutoSize = true;
+            this.lblDetectedUsers.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblDetectedUsers.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDetectedUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.lblDetectedUsers.Location = new System.Drawing.Point(586, 93);
+            this.lblDetectedUsers.Location = new System.Drawing.Point(590, 94);
             this.lblDetectedUsers.Name = "lblDetectedUsers";
             this.lblDetectedUsers.Size = new System.Drawing.Size(62, 15);
             this.lblDetectedUsers.TabIndex = 18;
             this.lblDetectedUsers.Text = "0 detected";
+            this.lblDetectedUsers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.label5.Location = new System.Drawing.Point(577, 126);
+            this.label5.Location = new System.Drawing.Point(581, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 19);
             this.label5.TabIndex = 19;
@@ -141,14 +141,15 @@ namespace ChangeIt
             // 
             // lblDetectedMovingUsers
             // 
-            this.lblDetectedMovingUsers.AutoSize = true;
+            this.lblDetectedMovingUsers.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblDetectedMovingUsers.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDetectedMovingUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.lblDetectedMovingUsers.Location = new System.Drawing.Point(586, 156);
+            this.lblDetectedMovingUsers.Location = new System.Drawing.Point(590, 151);
             this.lblDetectedMovingUsers.Name = "lblDetectedMovingUsers";
             this.lblDetectedMovingUsers.Size = new System.Drawing.Size(62, 15);
             this.lblDetectedMovingUsers.TabIndex = 20;
             this.lblDetectedMovingUsers.Text = "0 detected";
+            this.lblDetectedMovingUsers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // noCameraIcon
             // 
@@ -190,7 +191,7 @@ namespace ChangeIt
             // 
             this.pbDetected.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbDetected.InitialImage = global::ChangeIt.Properties.Resources.foto;
-            this.pbDetected.Location = new System.Drawing.Point(541, 189);
+            this.pbDetected.Location = new System.Drawing.Point(545, 189);
             this.pbDetected.Name = "pbDetected";
             this.pbDetected.Size = new System.Drawing.Size(153, 140);
             this.pbDetected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -201,7 +202,7 @@ namespace ChangeIt
             // 
             this.tbPerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
             this.tbPerson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
-            this.tbPerson.Location = new System.Drawing.Point(549, 348);
+            this.tbPerson.Location = new System.Drawing.Point(554, 348);
             this.tbPerson.Name = "tbPerson";
             this.tbPerson.Size = new System.Drawing.Size(135, 23);
             this.tbPerson.TabIndex = 23;
@@ -218,7 +219,7 @@ namespace ChangeIt
             this.btnAddPerson.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddPerson.IconSize = 28;
             this.btnAddPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPerson.Location = new System.Drawing.Point(549, 386);
+            this.btnAddPerson.Location = new System.Drawing.Point(554, 386);
             this.btnAddPerson.Name = "btnAddPerson";
             this.btnAddPerson.Size = new System.Drawing.Size(135, 33);
             this.btnAddPerson.TabIndex = 22;

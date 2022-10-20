@@ -21,7 +21,6 @@ namespace ChangeIt
         private VideoCaptureDevice selectedDevice;
         private int newSelectedIndex = -1;
         private int oldSelectedIndex = -1;
-        private bool faceDetectionEnabled = false;
 
         CascadeClassifier faceCascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt.xml");
         #endregion
@@ -78,6 +77,7 @@ namespace ChangeIt
         private void BtnTurnOn_Click(object sender, EventArgs e)
         {
             CloseCurrentDevice();
+            ResetDetectionStatistics();
             noCameraIcon.BringToFront();
             if (oldSelectedIndex != newSelectedIndex)
             {
@@ -88,7 +88,7 @@ namespace ChangeIt
                 //Video Capture
                 selectedDevice = new VideoCaptureDevice(deviceName);
 
-                selectedDevice.NewFrame += new NewFrameEventHandler(Capturing);
+                selectedDevice.NewFrame +=  new NewFrameEventHandler(Capturing);
 
                 selectedDevice.Start();
                 noCameraIcon.SendToBack();
@@ -118,7 +118,10 @@ namespace ChangeIt
 
             ThreadSafe(() =>
             {
-                UpdateDetectionStatistics(faces.Length); //Código que modifica controles creados en el hilo principal
+                if (selectedDevice != null && selectedDevice.IsRunning)
+                    UpdateDetectionStatistics(faces.Length); //Código que modifica controles creados en el hilo principal
+                else
+                    ResetDetectionStatistics();
             }, this);  //this si estas en la clase del formulario principal
 
             //If faces detected
@@ -133,7 +136,10 @@ namespace ChangeIt
             }
 
             //Show final Image
-            pBVideoPreview.Image = imageCV.ToBitmap();
+            if (selectedDevice != null && selectedDevice.IsRunning)
+                pBVideoPreview.Image = imageCV.ToBitmap();
+            else
+                pBVideoPreview.Image = null;
         }
         #endregion
 
@@ -154,18 +160,21 @@ namespace ChangeIt
 
         private void UpdateDetectionStatistics(int faces)
         {
-            lblDetectedUsers.Text = faces.ToString();
+            lblDetectedUsers.Text = faces.ToString() + " detected";
+        }
+
+        private void ResetDetectionStatistics()
+        {
+            lblDetectedUsers.Text = "No video entry";
+            lblDetectedMovingUsers.Text = "No video entry";
         }
 
         private void FormCameraUtilities_FormClosed(object sender, FormClosedEventArgs e)
         {
             CloseCurrentDevice();
         }
+              
 
-        private void pBVideoPreview_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
     }
 }
