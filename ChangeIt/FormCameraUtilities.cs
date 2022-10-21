@@ -11,6 +11,11 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.Face;
 using Emgu.CV.CvEnum;
+using System.IO;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace ChangeIt
 {
@@ -21,6 +26,12 @@ namespace ChangeIt
         private VideoCaptureDevice selectedDevice;
         private int newSelectedIndex = -1;
         private int oldSelectedIndex = -1;
+        private bool enableSaveImage = false;
+
+        List<Image<Gray, Byte>> trainedFaces = new List<Image<Gray, byte>>();
+        List<int> personLabels = new List<int>();
+        private static bool isTrained = false;
+
 
         CascadeClassifier faceCascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt.xml");
         #endregion
@@ -77,7 +88,7 @@ namespace ChangeIt
         private void BtnTurnOn_Click(object sender, EventArgs e)
         {
             CloseCurrentDevice();
-            ResetDetectionStatistics();
+            ResetDetectionControls();
             noCameraIcon.BringToFront();
             if (oldSelectedIndex != newSelectedIndex)
             {
@@ -89,6 +100,7 @@ namespace ChangeIt
                 selectedDevice = new VideoCaptureDevice(deviceName);
 
                 selectedDevice.NewFrame +=  new NewFrameEventHandler(Capturing);
+                btnAddPerson.Enabled = true;
 
                 selectedDevice.Start();
                 noCameraIcon.SendToBack();
@@ -104,12 +116,15 @@ namespace ChangeIt
         private void Capturing(object sender, NewFrameEventArgs eventArgs)
         {
             //Clone the frame
-            Bitmap Image = (Bitmap)eventArgs.Frame.Clone();
+            Bitmap currentFrame = (Bitmap)eventArgs.Frame.Clone();
 
+
+
+            #region Detección Facial
             //Convert from Bgr to Image
             Mat grayImage = new Mat();
-            Image<Bgr, byte> imageCV = Image.ToImage<Bgr, byte>(); //Convert Bitmpap to Image CV
-            CvInvoke.CvtColor(imageCV, grayImage, ColorConversion.Bgr2Gray);
+            Image<Bgr, byte> currentFrameCV = currentFrame.ToImage<Bgr, byte>(); //Convert Bitmpap to Image CV
+            CvInvoke.CvtColor(currentFrameCV, grayImage, ColorConversion.Bgr2Gray);
 
             //Enhance the image to get a better result
             CvInvoke.EqualizeHist(grayImage, grayImage);
@@ -119,9 +134,9 @@ namespace ChangeIt
             ThreadSafe(() =>
             {
                 if (selectedDevice != null && selectedDevice.IsRunning)
-                    UpdateDetectionStatistics(faces.Length); //Código que modifica controles creados en el hilo principal
+                    UpdateDetectionControls(faces.Length); //Código que modifica controles creados en el hilo principal
                 else
-                    ResetDetectionStatistics();
+                    ResetDetectionControls();
             }, this);  //this si estas en la clase del formulario principal
 
             //If faces detected
@@ -131,20 +146,89 @@ namespace ChangeIt
                 foreach(var face in faces)
                 {
                     //Draw square around each face
-                    CvInvoke.Rectangle(imageCV, face, new Bgr(Color.Red).MCvScalar, 2);
+                    CvInvoke.Rectangle(currentFrameCV, face, new Bgr(Color.Red).MCvScalar, 2);
+
+                    //Add person
+                    //Assign the face to the picture Box face
+                    Image<Bgr, Byte> resultImage = currentFrameCV.Convert<Bgr, Byte>();
+                    resultImage.ROI = face;
+                    pbDetected.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pbDetected.Image = resultImage.ToBitmap();
+
+                    if (enableSaveImage)
+                    {
+                        //Create directory if not exists
+                        string path = Directory.GetCurrentDirectory() + @"\TrainedImages";
+                        if (!Directory.Exists(path))
+                            Directory.CreateDirectory(path);
+
+
+                        //Save 10 images with delay a second for each image
+                        ThreadSafe(() =>
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                //resize the image to save it
+                                resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + tbPersonName.Text + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss") + ".jpg");
+                                Thread.Sleep(1000);
+                            }                        
+                        }, this);
+                    }
+                    enableSaveImage = false;
                 }
             }
+            #endregion
+
+
 
             //Show final Image
             if (selectedDevice != null && selectedDevice.IsRunning)
-                pBVideoPreview.Image = imageCV.ToBitmap();
+                pBVideoPreview.Image = currentFrameCV.ToBitmap();
             else
+            {
                 pBVideoPreview.Image = null;
+                pbDetected.Image = null;
+            }
         }
         #endregion
 
+        private bool TrainImagesFromDir()
+        {
+            int imagesCount = 0;
+            double threshold = 7000;
+            trainedFaces.Clear();
+            personLabels.Clear();
+            try
+            {
+                string path = Directory.GetCurrentDirectory() + @"\TrainedFaces";
+                string[] files = Directory.GetFiles(path, "*.jpg", SearchOption.AllDirectories);
 
-        //Usando BackgroundWorker
+                foreach (var file in files)
+                {
+                    Image<Gray, Byte> trainedImage = new Image<Gray, byte>(file);
+                    trainedFaces.Add(trainedImage);
+                    personLabels.Add(imagesCount);
+
+                    imagesCount++;
+                }
+
+                EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, threshold);
+                recognizer.Train(trainedFaces.ToArray(), personLabels.ToArray());
+
+                isTrained = true;
+                Debug.WriteLine(imagesCount);
+                Debug.WriteLine(isTrained);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                isTrained = false;
+                MessageBox.Show("Error in Train Images" + ex.Message);
+                return false;
+            }
+        }
+
+        //BackgroundWorker
         private void ThreadSafe(Action callback, Form form)
         {
             BackgroundWorker worker = new BackgroundWorker();
@@ -158,23 +242,35 @@ namespace ChangeIt
             worker.RunWorkerAsync();
         }
 
-        private void UpdateDetectionStatistics(int faces)
+        private void UpdateDetectionControls(int faces)
         {
             lblDetectedUsers.Text = faces.ToString() + " detected";
         }
 
-        private void ResetDetectionStatistics()
+        private void ResetDetectionControls()
         {
             lblDetectedUsers.Text = "No video entry";
             lblDetectedMovingUsers.Text = "No video entry";
+            btnAddPerson.Enabled = false;
         }
 
         private void FormCameraUtilities_FormClosed(object sender, FormClosedEventArgs e)
         {
             CloseCurrentDevice();
         }
-              
 
-        
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            btnSave.Enabled = true;
+            btnAddPerson.Enabled = false;
+            enableSaveImage = true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            btnSave.Enabled = false;
+            btnAddPerson.Enabled = true;
+            enableSaveImage = false;
+        }
     }
 }
