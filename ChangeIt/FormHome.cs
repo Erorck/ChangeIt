@@ -120,7 +120,7 @@ namespace ChangeIt
         private void BtnCamera_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.cYellow);
-            this.Size = new Size(220 + 744, 499 + 81);
+            this.Size = new Size(220 + 744, 555 + 81);
             OpenChildForm(new FormCameraUtilities());
         }
 

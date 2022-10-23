@@ -39,10 +39,12 @@ namespace ChangeIt
             this.lblDetectedMovingUsers = new System.Windows.Forms.Label();
             this.noCameraIcon = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAnalyze = new FontAwesome.Sharp.IconButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnSave = new FontAwesome.Sharp.IconButton();
             this.pbDetected = new System.Windows.Forms.PictureBox();
             this.tbPersonName = new System.Windows.Forms.TextBox();
-            this.btnAddPerson = new FontAwesome.Sharp.IconButton();
-            this.btnSave = new FontAwesome.Sharp.IconButton();
+            this.btnDetectFaces = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.pBVideoPreview)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDetected)).BeginInit();
@@ -170,10 +172,12 @@ namespace ChangeIt
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(85)))));
+            this.panel1.Controls.Add(this.btnAnalyze);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.pbDetected);
             this.panel1.Controls.Add(this.tbPersonName);
-            this.panel1.Controls.Add(this.btnAddPerson);
+            this.panel1.Controls.Add(this.btnDetectFaces);
             this.panel1.Controls.Add(this.noCameraIcon);
             this.panel1.Controls.Add(this.lblDetectedMovingUsers);
             this.panel1.Controls.Add(this.label5);
@@ -186,51 +190,40 @@ namespace ChangeIt
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(723, 468);
+            this.panel1.Size = new System.Drawing.Size(723, 560);
             this.panel1.TabIndex = 2;
             // 
-            // pbDetected
+            // btnAnalyze
             // 
-            this.pbDetected.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbDetected.InitialImage = global::ChangeIt.Properties.Resources.foto;
-            this.pbDetected.Location = new System.Drawing.Point(545, 233);
-            this.pbDetected.Name = "pbDetected";
-            this.pbDetected.Size = new System.Drawing.Size(153, 140);
-            this.pbDetected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbDetected.TabIndex = 24;
-            this.pbDetected.TabStop = false;
+            this.btnAnalyze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.btnAnalyze.FlatAppearance.BorderSize = 0;
+            this.btnAnalyze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnalyze.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.btnAnalyze.IconChar = FontAwesome.Sharp.IconChar.Phabricator;
+            this.btnAnalyze.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.btnAnalyze.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAnalyze.IconSize = 28;
+            this.btnAnalyze.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAnalyze.Location = new System.Drawing.Point(559, 491);
+            this.btnAnalyze.Name = "btnAnalyze";
+            this.btnAnalyze.Size = new System.Drawing.Size(124, 33);
+            this.btnAnalyze.TabIndex = 27;
+            this.btnAnalyze.Text = "Analyze faces";
+            this.btnAnalyze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAnalyze.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAnalyze.UseVisualStyleBackColor = false;
+            this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
             // 
-            // tbPersonName
+            // label1
             // 
-            this.tbPersonName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
-            this.tbPersonName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
-            this.tbPersonName.Location = new System.Drawing.Point(554, 382);
-            this.tbPersonName.Name = "tbPersonName";
-            this.tbPersonName.Size = new System.Drawing.Size(135, 23);
-            this.tbPersonName.TabIndex = 23;
-            this.tbPersonName.Text = "Nombre";
-            // 
-            // btnAddPerson
-            // 
-            this.btnAddPerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.btnAddPerson.Enabled = false;
-            this.btnAddPerson.FlatAppearance.BorderSize = 0;
-            this.btnAddPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPerson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
-            this.btnAddPerson.IconChar = FontAwesome.Sharp.IconChar.FaceSmileBeam;
-            this.btnAddPerson.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
-            this.btnAddPerson.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAddPerson.IconSize = 28;
-            this.btnAddPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPerson.Location = new System.Drawing.Point(554, 185);
-            this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(135, 33);
-            this.btnAddPerson.TabIndex = 22;
-            this.btnAddPerson.Text = "Add Person";
-            this.btnAddPerson.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddPerson.UseVisualStyleBackColor = false;
-            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.label1.Location = new System.Drawing.Point(576, 232);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 25);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Captured";
             // 
             // btnSave
             // 
@@ -244,21 +237,64 @@ namespace ChangeIt
             this.btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSave.IconSize = 28;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(565, 416);
+            this.btnSave.Location = new System.Drawing.Point(565, 443);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(113, 33);
             this.btnSave.TabIndex = 25;
-            this.btnSave.Text = "Save Person";
+            this.btnSave.Text = "Save Image";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // pbDetected
+            // 
+            this.pbDetected.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbDetected.InitialImage = global::ChangeIt.Properties.Resources.foto;
+            this.pbDetected.Location = new System.Drawing.Point(545, 260);
+            this.pbDetected.Name = "pbDetected";
+            this.pbDetected.Size = new System.Drawing.Size(153, 140);
+            this.pbDetected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbDetected.TabIndex = 24;
+            this.pbDetected.TabStop = false;
+            // 
+            // tbPersonName
+            // 
+            this.tbPersonName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.tbPersonName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.tbPersonName.Location = new System.Drawing.Point(554, 409);
+            this.tbPersonName.Name = "tbPersonName";
+            this.tbPersonName.Size = new System.Drawing.Size(135, 23);
+            this.tbPersonName.TabIndex = 23;
+            this.tbPersonName.Text = "Nombre";
+            // 
+            // btnDetectFaces
+            // 
+            this.btnDetectFaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
+            this.btnDetectFaces.Enabled = false;
+            this.btnDetectFaces.FlatAppearance.BorderSize = 0;
+            this.btnDetectFaces.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetectFaces.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.btnDetectFaces.IconChar = FontAwesome.Sharp.IconChar.FaceSmileBeam;
+            this.btnDetectFaces.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.btnDetectFaces.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnDetectFaces.IconSize = 28;
+            this.btnDetectFaces.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDetectFaces.Location = new System.Drawing.Point(554, 185);
+            this.btnDetectFaces.Name = "btnDetectFaces";
+            this.btnDetectFaces.Size = new System.Drawing.Size(135, 33);
+            this.btnDetectFaces.TabIndex = 22;
+            this.btnDetectFaces.Text = "Detect Faces";
+            this.btnDetectFaces.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDetectFaces.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDetectFaces.UseVisualStyleBackColor = false;
+            this.btnDetectFaces.Click += new System.EventHandler(this.btnAddPerson_Click);
+            // 
             // FormCameraUtilities
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 468);
+            this.ClientSize = new System.Drawing.Size(723, 560);
             this.Controls.Add(this.panel1);
             this.Name = "FormCameraUtilities";
             this.Text = "FormCameraUtilities";
@@ -284,9 +320,11 @@ namespace ChangeIt
         private System.Windows.Forms.Label lblDetectedMovingUsers;
         private FontAwesome.Sharp.IconButton noCameraIcon;
         private System.Windows.Forms.Panel panel1;
-        private FontAwesome.Sharp.IconButton btnAddPerson;
+        private FontAwesome.Sharp.IconButton btnDetectFaces;
         private System.Windows.Forms.TextBox tbPersonName;
         private System.Windows.Forms.PictureBox pbDetected;
         private FontAwesome.Sharp.IconButton btnSave;
+        private System.Windows.Forms.Label label1;
+        private FontAwesome.Sharp.IconButton btnAnalyze;
     }
 }
