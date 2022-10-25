@@ -30,6 +30,7 @@ namespace ChangeIt
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panelHistogram = new System.Windows.Forms.Panel();
             this.btnSaveImage = new FontAwesome.Sharp.IconButton();
             this.cbSelectedFilter = new System.Windows.Forms.ComboBox();
@@ -40,11 +41,10 @@ namespace ChangeIt
             this.btnUploadImage = new FontAwesome.Sharp.IconButton();
             this.pbEdited = new System.Windows.Forms.PictureBox();
             this.pBOriginal = new System.Windows.Forms.PictureBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -67,6 +67,13 @@ namespace ChangeIt
             this.panel1.Size = new System.Drawing.Size(1097, 480);
             this.panel1.TabIndex = 0;
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(459, 413);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 20;
+            // 
             // panelHistogram
             // 
             this.panelHistogram.BackColor = System.Drawing.Color.Black;
@@ -79,6 +86,7 @@ namespace ChangeIt
             // btnSaveImage
             // 
             this.btnSaveImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
+            this.btnSaveImage.Enabled = false;
             this.btnSaveImage.FlatAppearance.BorderSize = 0;
             this.btnSaveImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
@@ -87,7 +95,7 @@ namespace ChangeIt
             this.btnSaveImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSaveImage.IconSize = 32;
             this.btnSaveImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveImage.Location = new System.Drawing.Point(610, 418);
+            this.btnSaveImage.Location = new System.Drawing.Point(641, 418);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnSaveImage.Size = new System.Drawing.Size(147, 40);
@@ -96,23 +104,27 @@ namespace ChangeIt
             this.btnSaveImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSaveImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveImage.UseVisualStyleBackColor = false;
+            this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
             // 
             // cbSelectedFilter
             // 
             this.cbSelectedFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.cbSelectedFilter.Enabled = false;
             this.cbSelectedFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbSelectedFilter.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cbSelectedFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
             this.cbSelectedFilter.FormattingEnabled = true;
-            this.cbSelectedFilter.Location = new System.Drawing.Point(396, 375);
+            this.cbSelectedFilter.Location = new System.Drawing.Point(424, 375);
             this.cbSelectedFilter.Name = "cbSelectedFilter";
             this.cbSelectedFilter.Size = new System.Drawing.Size(175, 25);
             this.cbSelectedFilter.TabIndex = 15;
             this.cbSelectedFilter.Text = "Select a Filter";
+            this.cbSelectedFilter.SelectedIndexChanged += new System.EventHandler(this.cbSelectedFilter_SelectedIndexChanged);
             // 
             // btnResetImage
             // 
             this.btnResetImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
+            this.btnResetImage.Enabled = false;
             this.btnResetImage.FlatAppearance.BorderSize = 0;
             this.btnResetImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
@@ -121,7 +133,7 @@ namespace ChangeIt
             this.btnResetImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnResetImage.IconSize = 32;
             this.btnResetImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnResetImage.Location = new System.Drawing.Point(221, 367);
+            this.btnResetImage.Location = new System.Drawing.Point(248, 367);
             this.btnResetImage.Name = "btnResetImage";
             this.btnResetImage.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnResetImage.Size = new System.Drawing.Size(105, 40);
@@ -130,10 +142,12 @@ namespace ChangeIt
             this.btnResetImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnResetImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnResetImage.UseVisualStyleBackColor = false;
+            this.btnResetImage.Click += new System.EventHandler(this.btnResetImage_Click);
             // 
             // btnApplyFilter
             // 
             this.btnApplyFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
+            this.btnApplyFilter.Enabled = false;
             this.btnApplyFilter.FlatAppearance.BorderSize = 0;
             this.btnApplyFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApplyFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
@@ -142,7 +156,7 @@ namespace ChangeIt
             this.btnApplyFilter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnApplyFilter.IconSize = 32;
             this.btnApplyFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnApplyFilter.Location = new System.Drawing.Point(610, 367);
+            this.btnApplyFilter.Location = new System.Drawing.Point(641, 367);
             this.btnApplyFilter.Name = "btnApplyFilter";
             this.btnApplyFilter.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnApplyFilter.Size = new System.Drawing.Size(147, 40);
@@ -151,13 +165,14 @@ namespace ChangeIt
             this.btnApplyFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnApplyFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnApplyFilter.UseVisualStyleBackColor = false;
+            this.btnApplyFilter.Click += new System.EventHandler(this.btnApplyFilter_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.label2.Location = new System.Drawing.Point(571, 310);
+            this.label2.Location = new System.Drawing.Point(568, 310);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 25);
             this.label2.TabIndex = 12;
@@ -168,7 +183,7 @@ namespace ChangeIt
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.label1.Location = new System.Drawing.Point(154, 310);
+            this.label1.Location = new System.Drawing.Point(169, 310);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 25);
             this.label1.TabIndex = 10;
@@ -185,7 +200,7 @@ namespace ChangeIt
             this.btnUploadImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUploadImage.IconSize = 32;
             this.btnUploadImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUploadImage.Location = new System.Drawing.Point(43, 367);
+            this.btnUploadImage.Location = new System.Drawing.Point(70, 367);
             this.btnUploadImage.Name = "btnUploadImage";
             this.btnUploadImage.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnUploadImage.Size = new System.Drawing.Size(160, 40);
@@ -194,31 +209,25 @@ namespace ChangeIt
             this.btnUploadImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUploadImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUploadImage.UseVisualStyleBackColor = false;
+            this.btnUploadImage.Click += new System.EventHandler(this.btnUploadImage_Click);
             // 
             // pbEdited
             // 
-            this.pbEdited.Location = new System.Drawing.Point(442, 43);
+            this.pbEdited.Location = new System.Drawing.Point(415, 43);
             this.pbEdited.Name = "pbEdited";
-            this.pbEdited.Size = new System.Drawing.Size(315, 254);
-            this.pbEdited.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbEdited.Size = new System.Drawing.Size(373, 254);
+            this.pbEdited.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbEdited.TabIndex = 9;
             this.pbEdited.TabStop = false;
             // 
             // pBOriginal
             // 
-            this.pBOriginal.Location = new System.Drawing.Point(43, 43);
+            this.pBOriginal.Location = new System.Drawing.Point(23, 43);
             this.pBOriginal.Name = "pBOriginal";
-            this.pBOriginal.Size = new System.Drawing.Size(315, 254);
-            this.pBOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBOriginal.Size = new System.Drawing.Size(373, 254);
+            this.pBOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBOriginal.TabIndex = 8;
             this.pBOriginal.TabStop = false;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(428, 413);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 20;
             // 
             // FormImageFilters
             // 
@@ -230,9 +239,9 @@ namespace ChangeIt
             this.Text = "FormImageFilters";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }

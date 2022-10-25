@@ -230,6 +230,7 @@ namespace ChangeIt
 
         private bool TrainImagesFromDir()
         {
+            isTrained = false;
             int imagesCount = 0;
             double threshold = 2000;
             trainedFaces.Clear();
