@@ -30,7 +30,8 @@ namespace ChangeIt
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.lbControlSliderDes = new System.Windows.Forms.Label();
+            this.tbSliderControl = new System.Windows.Forms.TrackBar();
             this.panelHistogram = new System.Windows.Forms.Panel();
             this.btnSaveImage = new FontAwesome.Sharp.IconButton();
             this.cbSelectedFilter = new System.Windows.Forms.ComboBox();
@@ -41,8 +42,9 @@ namespace ChangeIt
             this.btnUploadImage = new FontAwesome.Sharp.IconButton();
             this.pbEdited = new System.Windows.Forms.PictureBox();
             this.pBOriginal = new System.Windows.Forms.PictureBox();
+            this.lbControlSliderVal = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSliderControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +52,9 @@ namespace ChangeIt
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(48)))), ((int)(((byte)(85)))));
-            this.panel1.Controls.Add(this.trackBar1);
+            this.panel1.Controls.Add(this.lbControlSliderVal);
+            this.panel1.Controls.Add(this.lbControlSliderDes);
+            this.panel1.Controls.Add(this.tbSliderControl);
             this.panel1.Controls.Add(this.panelHistogram);
             this.panel1.Controls.Add(this.btnSaveImage);
             this.panel1.Controls.Add(this.cbSelectedFilter);
@@ -67,12 +71,26 @@ namespace ChangeIt
             this.panel1.Size = new System.Drawing.Size(1097, 480);
             this.panel1.TabIndex = 0;
             // 
-            // trackBar1
+            // lbControlSliderDes
             // 
-            this.trackBar1.Location = new System.Drawing.Point(459, 413);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 20;
+            this.lbControlSliderDes.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbControlSliderDes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.lbControlSliderDes.Location = new System.Drawing.Point(462, 448);
+            this.lbControlSliderDes.Name = "lbControlSliderDes";
+            this.lbControlSliderDes.Size = new System.Drawing.Size(126, 23);
+            this.lbControlSliderDes.TabIndex = 21;
+            this.lbControlSliderDes.Text = "Descripción Control";
+            this.lbControlSliderDes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tbSliderControl
+            // 
+            this.tbSliderControl.Enabled = false;
+            this.tbSliderControl.Location = new System.Drawing.Point(424, 413);
+            this.tbSliderControl.Maximum = 255;
+            this.tbSliderControl.Name = "tbSliderControl";
+            this.tbSliderControl.Size = new System.Drawing.Size(175, 45);
+            this.tbSliderControl.TabIndex = 20;
+            this.tbSliderControl.ValueChanged += new System.EventHandler(this.tbSliderControl_ValueChanged);
             // 
             // panelHistogram
             // 
@@ -229,6 +247,17 @@ namespace ChangeIt
             this.pBOriginal.TabIndex = 8;
             this.pBOriginal.TabStop = false;
             // 
+            // lbControlSliderVal
+            // 
+            this.lbControlSliderVal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbControlSliderVal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.lbControlSliderVal.Location = new System.Drawing.Point(425, 448);
+            this.lbControlSliderVal.Name = "lbControlSliderVal";
+            this.lbControlSliderVal.Size = new System.Drawing.Size(42, 23);
+            this.lbControlSliderVal.TabIndex = 22;
+            this.lbControlSliderVal.Text = "0";
+            this.lbControlSliderVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormImageFilters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -239,7 +268,7 @@ namespace ChangeIt
             this.Text = "FormImageFilters";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSliderControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).EndInit();
             this.ResumeLayout(false);
@@ -259,6 +288,8 @@ namespace ChangeIt
         private System.Windows.Forms.PictureBox pBOriginal;
         private FontAwesome.Sharp.IconButton btnSaveImage;
         private System.Windows.Forms.Panel panelHistogram;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar tbSliderControl;
+        private System.Windows.Forms.Label lbControlSliderDes;
+        private System.Windows.Forms.Label lbControlSliderVal;
     }
 }
