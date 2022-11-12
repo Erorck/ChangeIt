@@ -13,6 +13,13 @@ namespace ChangeIt
             public Bitmap bmap { get; set; }
         }
 
+        public class HistogramEventArgs : EventArgs
+        {
+            public Dictionary<int, int> histo { get; set; }
+            public char channel { get; set; }
+            public int display { get; set; }
+        }
+
         //Manipulate method (bitmap)
         public void Manipulate(Bitmap bmap, int selectedFilter, int extra = 127)
         {
@@ -281,13 +288,76 @@ namespace ChangeIt
             return mBmap;
         }
 
-        //Define the Event Handler Delegate
+        public void getHistogram(Bitmap bmp, char channel, int display)
+        {
+            if (bmp == null)
+                OnHistogramFinished(new Dictionary<int, int>(), channel, display);
+
+            Dictionary<int, int> histo = new Dictionary<int, int>();
+
+            for (int i = 1; i <= 255; i++)
+            {
+                histo.Add(i, 1);
+            }
+
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    // Get pixel color 
+                    Color c = bmp.GetPixel(x, y);
+                    // If it exists in our 'histogram' increment the corresponding value, or add new
+
+                    int colorValue = 0;
+
+                    switch (channel)
+                    {
+                        case 'R':
+                        case 'r':
+                            {
+                                colorValue = c.R;
+                                break;
+                            }
+
+                        case 'G':
+                        case 'g':
+                            {
+                                colorValue = c.G;
+                                break;
+                            }
+
+                        case 'B':
+                        case 'b':
+                            {
+                                colorValue = c.B;
+                                break;
+                            }
+                    }
+
+                    if (histo.ContainsKey(colorValue))
+                        histo[colorValue] = histo[colorValue] + 1;
+
+                }
+            }
+
+            OnHistogramFinished(histo, channel, display);
+        }
+
+
+        //Define the Event Handler Delegates
         public event EventHandler<ImageEventArgs> ImageFinished;
 
-        //Add Event method
+        public event EventHandler<HistogramEventArgs> HistogramFinished;
+
+        //Add Event methods
         protected virtual void OnImageFinished(Bitmap bmap)
         {
             ImageFinished?.Invoke(this, new ImageEventArgs() { bmap = bmap });
+        }
+
+        protected virtual void OnHistogramFinished(Dictionary<int, int> histo, char channel, int display)
+        {
+            HistogramFinished?.Invoke(this, new HistogramEventArgs() { histo = histo, channel = channel, display = display}) ;
         }
 
     }

@@ -106,7 +106,7 @@ namespace ChangeIt
         private void IconButton1_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.cYellow);
-            this.Size = new Size(220 + 970, 450 + 81);
+            this.Size = new Size(1190 + 220, 490 + 81);
             OpenChildForm(new FormImageFilters());
         }
 

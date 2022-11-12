@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.CV.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,21 +32,22 @@ namespace ChangeIt
             LoadFilterList();
 
             modifyRGB.ImageFinished += OnImageFinished;
+            modifyRGB.HistogramFinished += OnHistogramFinished;
         }
 
         private void LoadFilterList()
         {
-            foreach(var filter in FilterList)
+            foreach (var filter in FilterList)
                 cbSelectedFilter.Items.Add(filter);
         }
 
         public void DisplayImage(Bitmap b, int window)
         {
-            if(window == 1)
+            if (window == 1)
             {
                 pBOriginal.Image = b;
             }
-            else if(window == 2)
+            else if (window == 2)
             {
                 pbEdited.Image = b;
             }
@@ -54,48 +58,91 @@ namespace ChangeIt
             }
         }
 
+        public void DisplayHistogram(Dictionary<int, int> d, int window, string channel)
+        {
+            if (window == 1)
+            {
+                chartHistOriginal.Series[channel].Points.Clear();
+                foreach (int key in d.Keys)
+                {
+                    chartHistOriginal.Series[channel].Points.AddXY(key, d[key]);
+                }
+            }
+            else if (window == 2)
+            {
+                chartHistEdited.Series[channel].Points.Clear();
+                foreach (int key in d.Keys)
+                {
+                    chartHistEdited.Series[channel].Points.AddXY(key, d[key]);
+                }
+            }
+            else
+            {
+                chartHistOriginal.Series[channel].Points.Clear();
+                chartHistEdited.Series[channel].Points.Clear();
+                foreach (int key in d.Keys)
+                {
+                    chartHistOriginal.Series[channel].Points.AddXY(key, d[key]);
+                    chartHistEdited.Series[channel].Points.AddXY(key, d[key]);
+
+                }
+            }
+        }
+
         void OnImageFinished(object sender, ImageEventArgs e)
         {
             DisplayImage(e.bmap, 2);
             btnApplyFilter.Enabled = true;
             btnSaveImage.Enabled = true;
+            modifyRGB.getHistogram(e.bmap, 'r', 2);
+            modifyRGB.getHistogram(e.bmap, 'g', 2);
+            modifyRGB.getHistogram(e.bmap, 'b', 2);
+            
+
             MessageBox.Show("Filtro aplicado");
-            HistoGram(e.bmap);
+
         }
 
-        private void HistoGram(Bitmap bmp)
+        void OnHistogramFinished(object sender, HistogramEventArgs e)
         {
-            // Get your image in a bitmap; this is how to get it from a picturebox
-            // Store the histogram in a dictionary          
-            Dictionary<Color, int> histo = new Dictionary<Color, int>();
-            for (int x = 0; x < bmp.Width; x++)
+            switch (e.channel)
             {
-                for (int y = 0; y < bmp.Height; y++)
-                {
-                    // Get pixel color 
-                    Color c = bmp.GetPixel(x, y);
-                    // If it exists in our 'histogram' increment the corresponding value, or add new
-                    if (histo.ContainsKey(c))
-                        histo[c] = histo[c] + 1;
-                    else
-                        histo.Add(c, 1);
-                }
-            }
-            // This outputs the histogram in an output window
-            foreach (Color key in histo.Keys)
-            {
-                Debug.WriteLine(key.ToString() + ": " + histo[key]);
+                case 'r':
+                case 'R':
+                    DisplayHistogram(e.histo, e.display, "Red");
+                    break;
+
+                case 'g':
+                case 'G':
+                    DisplayHistogram(e.histo, e.display, "Green");
+                    break;
+
+                case 'b':
+                case 'B':
+                    DisplayHistogram(e.histo, e.display, "Blue");
+                    break;
             }
         }
-
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
             newFile = getFile.OpenFile();
-            if(newFile != null)
+            if (newFile != null)
             {
                 DisplayImage(newFile, 1);
                 originalFile = new Bitmap(newFile);
+
+                modifyRGB.getHistogram(originalFile, 'r', 1);
+                modifyRGB.getHistogram(originalFile, 'b', 1);
+                modifyRGB.getHistogram(originalFile, 'g', 1);
+                
+
+                chartHistEdited.Series["Red"].Points.Clear();
+                chartHistEdited.Series["Green"].Points.Clear();
+                chartHistEdited.Series["Blue"].Points.Clear();
+
+                pbEdited.Image = null;
+
                 cbSelectedFilter.Enabled = true;
                 btnResetImage.Enabled = true;
             }
@@ -109,6 +156,11 @@ namespace ChangeIt
         private void btnResetImage_Click(object sender, EventArgs e)
         {
             newFile = new Bitmap(originalFile);
+
+            modifyRGB.getHistogram(originalFile, 'r', 3);
+            modifyRGB.getHistogram(originalFile, 'b', 3);
+            modifyRGB.getHistogram(originalFile, 'g', 3);           
+
             DisplayImage(newFile, 1);
             DisplayImage(newFile, 2);
         }
@@ -121,7 +173,7 @@ namespace ChangeIt
         private void cbSelectedFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnApplyFilter.Enabled = true;
-            if(cbSelectedFilter.SelectedIndex == 4)
+            if (cbSelectedFilter.SelectedIndex == 4)
             {
                 tbSliderControl.Enabled = true;
                 lbControlSliderDes.Text = "Umbral";

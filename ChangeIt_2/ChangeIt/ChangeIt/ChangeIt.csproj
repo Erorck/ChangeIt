@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,25 +66,25 @@
     <Compile Include="FormCameraUtilities.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCameraUtilities.Designer.cs" >
+    <Compile Include="FormCameraUtilities.Designer.cs">
       <DependentUpon>FormCameraUtilities.cs</DependentUpon>
     </Compile>
     <Compile Include="FormHome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormHome.Designer.cs" >
+    <Compile Include="FormHome.Designer.cs">
       <DependentUpon>FormHome.cs</DependentUpon>
     </Compile>
     <Compile Include="FormImageFilters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormImageFilters.Designer.cs" >
+    <Compile Include="FormImageFilters.Designer.cs">
       <DependentUpon>FormImageFilters.cs</DependentUpon>
     </Compile>
     <Compile Include="FormVideoFilters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormVideoFilters.Designer.cs" >
+    <Compile Include="FormVideoFilters.Designer.cs">
       <DependentUpon>FormVideoFilters.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageManipulation.cs" />

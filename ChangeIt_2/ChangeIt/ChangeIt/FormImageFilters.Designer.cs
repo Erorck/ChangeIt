@@ -29,11 +29,22 @@ namespace ChangeIt
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbControlSliderVal = new System.Windows.Forms.Label();
             this.lbControlSliderDes = new System.Windows.Forms.Label();
             this.tbSliderControl = new System.Windows.Forms.TrackBar();
             this.panelHistogram = new System.Windows.Forms.Panel();
+            this.chartHistOriginal = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnSaveImage = new FontAwesome.Sharp.IconButton();
             this.cbSelectedFilter = new System.Windows.Forms.ComboBox();
             this.btnResetImage = new FontAwesome.Sharp.IconButton();
@@ -43,10 +54,14 @@ namespace ChangeIt
             this.btnUploadImage = new FontAwesome.Sharp.IconButton();
             this.pbEdited = new System.Windows.Forms.PictureBox();
             this.pBOriginal = new System.Windows.Forms.PictureBox();
+            this.chartHistEdited = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSliderControl)).BeginInit();
+            this.panelHistogram.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistEdited)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,14 +83,14 @@ namespace ChangeIt
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(992, 431);
+            this.panel1.Size = new System.Drawing.Size(1190, 491);
             this.panel1.TabIndex = 0;
             // 
             // lbControlSliderVal
             // 
             this.lbControlSliderVal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lbControlSliderVal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
-            this.lbControlSliderVal.Location = new System.Drawing.Point(364, 388);
+            this.lbControlSliderVal.Location = new System.Drawing.Point(368, 415);
             this.lbControlSliderVal.Name = "lbControlSliderVal";
             this.lbControlSliderVal.Size = new System.Drawing.Size(36, 20);
             this.lbControlSliderVal.TabIndex = 22;
@@ -86,7 +101,7 @@ namespace ChangeIt
             // 
             this.lbControlSliderDes.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lbControlSliderDes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
-            this.lbControlSliderDes.Location = new System.Drawing.Point(405, 391);
+            this.lbControlSliderDes.Location = new System.Drawing.Point(409, 418);
             this.lbControlSliderDes.Name = "lbControlSliderDes";
             this.lbControlSliderDes.Size = new System.Drawing.Size(108, 15);
             this.lbControlSliderDes.TabIndex = 21;
@@ -96,7 +111,7 @@ namespace ChangeIt
             // tbSliderControl
             // 
             this.tbSliderControl.Enabled = false;
-            this.tbSliderControl.Location = new System.Drawing.Point(363, 358);
+            this.tbSliderControl.Location = new System.Drawing.Point(367, 385);
             this.tbSliderControl.Maximum = 255;
             this.tbSliderControl.Name = "tbSliderControl";
             this.tbSliderControl.Size = new System.Drawing.Size(150, 45);
@@ -106,11 +121,83 @@ namespace ChangeIt
             // panelHistogram
             // 
             this.panelHistogram.BackColor = System.Drawing.Color.Black;
+            this.panelHistogram.Controls.Add(this.chartHistEdited);
+            this.panelHistogram.Controls.Add(this.chartHistOriginal);
             this.panelHistogram.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelHistogram.Location = new System.Drawing.Point(735, 0);
+            this.panelHistogram.Location = new System.Drawing.Point(755, 0);
             this.panelHistogram.Name = "panelHistogram";
-            this.panelHistogram.Size = new System.Drawing.Size(257, 431);
+            this.panelHistogram.Size = new System.Drawing.Size(435, 491);
             this.panelHistogram.TabIndex = 17;
+            // 
+            // chartHistOriginal
+            // 
+            this.chartHistOriginal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.chartHistOriginal.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistOriginal.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.chartHistOriginal.BorderSkin.BackColor = System.Drawing.Color.Transparent;
+            this.chartHistOriginal.BorderSkin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistOriginal.BorderSkin.PageColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            chartArea2.AxisX.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX2.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX2.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisX2.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY2.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY2.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.AxisY2.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            chartArea2.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea2.Name = "ChartArea1";
+            chartArea2.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistOriginal.ChartAreas.Add(chartArea2);
+            this.chartHistOriginal.Dock = System.Windows.Forms.DockStyle.Top;
+            legend2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            legend2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            legend2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
+            legend2.InterlacedRowsColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            legend2.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            legend2.TitleSeparatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistOriginal.Legends.Add(legend2);
+            this.chartHistOriginal.Location = new System.Drawing.Point(0, 0);
+            this.chartHistOriginal.Name = "chartHistOriginal";
+            this.chartHistOriginal.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series4.Color = System.Drawing.Color.Red;
+            series4.LabelBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series4.LabelForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series4.Legend = "Legend1";
+            series4.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series4.Name = "Red";
+            series4.SmartLabelStyle.CalloutLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(20)))));
+            series5.Legend = "Legend1";
+            series5.Name = "Green";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(255)))));
+            series6.Legend = "Legend1";
+            series6.Name = "Blue";
+            this.chartHistOriginal.Series.Add(series4);
+            this.chartHistOriginal.Series.Add(series5);
+            this.chartHistOriginal.Series.Add(series6);
+            this.chartHistOriginal.Size = new System.Drawing.Size(435, 245);
+            this.chartHistOriginal.TabIndex = 23;
+            this.chartHistOriginal.Text = "chart1";
             // 
             // btnSaveImage
             // 
@@ -124,7 +211,7 @@ namespace ChangeIt
             this.btnSaveImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSaveImage.IconSize = 30;
             this.btnSaveImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveImage.Location = new System.Drawing.Point(549, 362);
+            this.btnSaveImage.Location = new System.Drawing.Point(553, 389);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Padding = new System.Windows.Forms.Padding(9, 0, 17, 0);
             this.btnSaveImage.Size = new System.Drawing.Size(166, 35);
@@ -143,7 +230,7 @@ namespace ChangeIt
             this.cbSelectedFilter.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.cbSelectedFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
             this.cbSelectedFilter.FormattingEnabled = true;
-            this.cbSelectedFilter.Location = new System.Drawing.Point(363, 325);
+            this.cbSelectedFilter.Location = new System.Drawing.Point(367, 352);
             this.cbSelectedFilter.Name = "cbSelectedFilter";
             this.cbSelectedFilter.Size = new System.Drawing.Size(151, 25);
             this.cbSelectedFilter.TabIndex = 15;
@@ -162,7 +249,7 @@ namespace ChangeIt
             this.btnResetImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnResetImage.IconSize = 30;
             this.btnResetImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnResetImage.Location = new System.Drawing.Point(213, 318);
+            this.btnResetImage.Location = new System.Drawing.Point(217, 345);
             this.btnResetImage.Name = "btnResetImage";
             this.btnResetImage.Padding = new System.Windows.Forms.Padding(9, 0, 17, 0);
             this.btnResetImage.Size = new System.Drawing.Size(102, 35);
@@ -185,7 +272,7 @@ namespace ChangeIt
             this.btnApplyFilter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnApplyFilter.IconSize = 30;
             this.btnApplyFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnApplyFilter.Location = new System.Drawing.Point(549, 318);
+            this.btnApplyFilter.Location = new System.Drawing.Point(553, 345);
             this.btnApplyFilter.Name = "btnApplyFilter";
             this.btnApplyFilter.Padding = new System.Windows.Forms.Padding(9, 0, 17, 0);
             this.btnApplyFilter.Size = new System.Drawing.Size(127, 35);
@@ -201,7 +288,7 @@ namespace ChangeIt
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.label2.Location = new System.Drawing.Point(501, 269);
+            this.label2.Location = new System.Drawing.Point(505, 296);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 25);
             this.label2.TabIndex = 12;
@@ -212,7 +299,7 @@ namespace ChangeIt
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
-            this.label1.Location = new System.Drawing.Point(145, 269);
+            this.label1.Location = new System.Drawing.Point(149, 296);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 25);
             this.label1.TabIndex = 10;
@@ -229,7 +316,7 @@ namespace ChangeIt
             this.btnUploadImage.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUploadImage.IconSize = 30;
             this.btnUploadImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUploadImage.Location = new System.Drawing.Point(56, 318);
+            this.btnUploadImage.Location = new System.Drawing.Point(60, 345);
             this.btnUploadImage.Name = "btnUploadImage";
             this.btnUploadImage.Padding = new System.Windows.Forms.Padding(9, 0, 17, 0);
             this.btnUploadImage.Size = new System.Drawing.Size(141, 35);
@@ -242,7 +329,7 @@ namespace ChangeIt
             // 
             // pbEdited
             // 
-            this.pbEdited.Location = new System.Drawing.Point(367, 37);
+            this.pbEdited.Location = new System.Drawing.Point(371, 64);
             this.pbEdited.Name = "pbEdited";
             this.pbEdited.Size = new System.Drawing.Size(334, 220);
             this.pbEdited.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -251,26 +338,99 @@ namespace ChangeIt
             // 
             // pBOriginal
             // 
-            this.pBOriginal.Location = new System.Drawing.Point(20, 37);
+            this.pBOriginal.Location = new System.Drawing.Point(24, 64);
             this.pBOriginal.Name = "pBOriginal";
             this.pBOriginal.Size = new System.Drawing.Size(334, 220);
             this.pBOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBOriginal.TabIndex = 8;
             this.pBOriginal.TabStop = false;
             // 
+            // chartHistEdited
+            // 
+            this.chartHistEdited.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.chartHistEdited.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistEdited.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            this.chartHistEdited.BorderSkin.BackColor = System.Drawing.Color.Transparent;
+            this.chartHistEdited.BorderSkin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistEdited.BorderSkin.PageColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            chartArea1.AxisX.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX2.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX2.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisX2.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY2.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY2.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            chartArea1.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            chartArea1.Name = "ChartArea1";
+            chartArea1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistEdited.ChartAreas.Add(chartArea1);
+            this.chartHistEdited.Dock = System.Windows.Forms.DockStyle.Top;
+            legend1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(13)))), ((int)(((byte)(39)))));
+            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            legend1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(57)))));
+            legend1.InterlacedRowsColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            legend1.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            legend1.TitleSeparatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            this.chartHistEdited.Legends.Add(legend1);
+            this.chartHistEdited.Location = new System.Drawing.Point(0, 245);
+            this.chartHistEdited.Name = "chartHistEdited";
+            this.chartHistEdited.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series1.Color = System.Drawing.Color.Red;
+            series1.LabelBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series1.LabelForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series1.Legend = "Legend1";
+            series1.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series1.Name = "Red";
+            series1.SmartLabelStyle.CalloutLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(182)))), ((int)(((byte)(156)))));
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(20)))));
+            series2.Legend = "Legend1";
+            series2.Name = "Green";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(255)))));
+            series3.Legend = "Legend1";
+            series3.Name = "Blue";
+            this.chartHistEdited.Series.Add(series1);
+            this.chartHistEdited.Series.Add(series2);
+            this.chartHistEdited.Series.Add(series3);
+            this.chartHistEdited.Size = new System.Drawing.Size(435, 245);
+            this.chartHistEdited.TabIndex = 24;
+            this.chartHistEdited.Text = "chart1";
+            // 
             // FormImageFilters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 431);
+            this.ClientSize = new System.Drawing.Size(1190, 491);
             this.Controls.Add(this.panel1);
             this.Name = "FormImageFilters";
             this.Text = "FormImageFilters";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSliderControl)).EndInit();
+            this.panelHistogram.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEdited)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBOriginal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistEdited)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -291,5 +451,7 @@ namespace ChangeIt
         private System.Windows.Forms.TrackBar tbSliderControl;
         private System.Windows.Forms.Label lbControlSliderDes;
         private System.Windows.Forms.Label lbControlSliderVal;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartHistOriginal;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartHistEdited;
     }
 }
