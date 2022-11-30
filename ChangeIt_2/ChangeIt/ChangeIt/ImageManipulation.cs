@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ChangeIt
 {
     class ImageManipulation
     {
-       
+        private static object control = new object();
+
         public class ImageEventArgs: EventArgs
         {
             public Bitmap bmap { get; set; }
@@ -102,6 +105,129 @@ namespace ChangeIt
             OnImageFinished(bmap);
         }
 
+        //Faster manipulate method (bitmap)
+        public void ManipulateLockBits(object bmp, int selectedFilter, int extra = 127)
+        {
+            Bitmap bmap = (Bitmap)bmp;
+
+            unsafe
+            {
+                BitmapData bitmapData = bmap.LockBits(new Rectangle(0, 0, bmap.Width, bmap.Height), ImageLockMode.ReadWrite, bmap.PixelFormat);
+
+                //Define Variables for bytes per pixel, as ewll as Image Widht and Height
+                int bytesPerPixel = Bitmap.GetPixelFormatSize(bmap.PixelFormat) / 8;
+                int heightInPixels = bitmapData.Height;
+                int widthInBytes = bitmapData.Width * bytesPerPixel;
+
+                //Define a pointer to the first in the locked image.
+                //Scan0 gets or sets the address of the first pixel data in the bitmap
+                //This can also be thought of as the first scan line in the bitmap
+                byte* PtrFirstPixel = (byte*)bitmapData.Scan0;
+                Color theNewColor;
+
+                //Step thru each pixel in the image using pointers
+                //Parallel.For executes a 'for' lopp in which iterations may run in parallel
+                Parallel.For(0, heightInPixels,  y =>
+                {
+                    //Use the 'stride' (scanline width) property to step line by line thru the image
+                    byte* currentLine = PtrFirstPixel + (y * bitmapData.Stride);
+                    for(int x = 0; x < widthInBytes; x = x + bytesPerPixel)
+                    {
+                        //GET each pixel color
+                        int oldRed = currentLine[x + 2];
+                        int oldGreen = currentLine[x + 1];
+                        int oldBlue = currentLine[x];
+
+                        Color theColor = Color.FromArgb(255, oldRed, oldGreen, oldBlue);
+
+                        lock (control)
+                        {
+                            //Change the color of the pixel
+                            switch (selectedFilter)
+                            {
+                                case 1:
+                                    {
+                                        theNewColor = turnSepia(theColor);
+                                        break;
+                                    }
+
+                                case 2:
+                                    {
+                                        theNewColor = turnGrayscale(theColor);
+                                        break;
+                                    }
+
+                                case 3:
+                                    {
+                                        theNewColor = turnInverted(theColor);
+                                        break;
+                                    }
+
+                                case 4:
+                                    {
+                                        bmap.UnlockBits(bitmapData);
+                                        Bitmap mBmap = mirrorImage(bmap);
+                                        OnImageFinished(mBmap);
+                                        bmap = mBmap;
+                                        return;
+                                    }
+
+                                case 5:
+                                    {
+                                        theNewColor = turnBinary(theColor, extra);
+                                        break;
+                                    }
+
+                                case 6:
+                                    {
+                                        theNewColor = turnOneColorChannel(theColor, 'R');
+                                        break;
+                                    }
+
+                                case 7:
+                                    {
+                                        theNewColor = turnOneColorChannel(theColor, 'G');
+                                        break;
+                                    }
+
+                                case 8:
+                                    {
+                                        theNewColor = turnOneColorChannel(theColor, 'B');
+                                        break;
+                                    }
+                                case 9:
+                                    {
+                                        theNewColor = turnMexico(theColor);
+                                        break;
+                                    }
+
+                                default:
+                                    {
+                                        theNewColor = theColor;
+                                        break;
+                                    }
+                            }
+
+                            currentLine[x] = theNewColor.B;
+                            currentLine[x + 1] = theNewColor.G;
+                            currentLine[x + 2] = theNewColor.R;
+                        }
+                        
+
+                        //currentLine[x] = 0;
+                        //currentLine[x + 1] = (byte)oldGreen;
+                        //currentLine[x + 2] = (byte)oldRed;
+                    }
+                });
+
+                bmap.UnlockBits(bitmapData);
+
+            }
+
+            OnImageFinished(bmap);
+        }
+
+
         //Filter methods
         public Color turnSepia(Color theColor)
         {
@@ -192,6 +318,20 @@ namespace ChangeIt
             //set new RGB value           
 
             return Color.FromArgb(a, ir, ig, ib);
+        }
+
+        public Color turnMexico(Color theColor)
+        {
+            int a, r, g, b;
+
+            //extract pixel components
+            a = theColor.A;
+            r = theColor.R;
+            g = theColor.G;
+            b = theColor.B;
+
+            return Color.FromArgb(a, r, g, 0);
+
         }
 
         public Color turnBinary(Color theColor, int threshold = 127)
@@ -288,6 +428,8 @@ namespace ChangeIt
             return mBmap;
         }
 
+
+        //Histogram methods
         public void getHistogram(Bitmap bmp, char channel, int display)
         {
             if (bmp == null)
@@ -338,6 +480,83 @@ namespace ChangeIt
                         histo[colorValue] = histo[colorValue] + 1;
 
                 }
+            }
+
+            OnHistogramFinished(histo, channel, display);
+        }
+
+        public void getLockBitsHistogram(Bitmap bmp, char channel, int display)
+        {
+            if (bmp == null)
+                OnHistogramFinished(new Dictionary<int, int>(), channel, display);
+
+            Dictionary<int, int> histo = new Dictionary<int, int>();
+
+            for (int i = 1; i <= 255; i++)
+            {
+                histo.Add(i, 1);
+            }
+
+            Bitmap bmap = new Bitmap(bmp);
+
+            unsafe{
+                BitmapData bitmapData = bmap.LockBits(new Rectangle(0, 0, bmap.Width, bmap.Height), ImageLockMode.ReadWrite, bmap.PixelFormat);
+
+                //Define Variables for bytes per pixel, as ewll as Image Widht and Height
+                int bytesPerPixel = Bitmap.GetPixelFormatSize(bmap.PixelFormat) / 8;
+                int heightInPixels = bitmapData.Height;
+                int widthInBytes = bitmapData.Width * bytesPerPixel;
+
+                //Define a pointer to the first in the locked image.
+                //Scan0 gets or sets the address of the first pixel data in the bitmap
+                //This can also be thought of as the first scan line in the bitmap
+                byte* PtrFirstPixel = (byte*)bitmapData.Scan0;
+
+                //Step thru each pixel in the image using pointers
+                //Parallel.For executes a 'for' lopp in which iterations may run in parallel
+                Parallel.For(0, heightInPixels, y =>
+                {
+                    //Use the 'stride' (scanline width) property to step line by line thru the image
+                    byte* currentLine = PtrFirstPixel + (y * bitmapData.Stride);
+                    for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
+                    {
+                        //GET each pixel color
+                        int oldBlue = currentLine[x];
+                        int oldGreen = currentLine[x + 1];
+                        int oldRed = currentLine[x + 2];
+                    
+                        int colorValue = 0;
+                        
+                        switch (channel)
+                        {
+                            case 'R':
+                            case 'r':
+                                {
+                                    colorValue = oldRed;
+                                    break;
+                                }
+
+                            case 'G':
+                            case 'g':
+                                {
+                                    colorValue = oldGreen;
+                                    break;
+                                }
+
+                            case 'B':
+                            case 'b':
+                                {
+                                    colorValue = oldBlue;
+                                    break;
+                                }
+                        }
+
+                        if (histo.ContainsKey(colorValue))
+                            histo[colorValue] = histo[colorValue] + 1;
+                    }
+                });
+                //bmp.UnlockBits(bitmapData);
+
             }
 
             OnHistogramFinished(histo, channel, display);

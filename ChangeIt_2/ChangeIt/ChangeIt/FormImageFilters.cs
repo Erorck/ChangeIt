@@ -23,7 +23,7 @@ namespace ChangeIt
 
         public string[] FilterList =
         {
-            "Sepia", "Escala de Grises", "Invertir", "Espejo", "Binario con Umbral", "Aislar Canal Rojo", "Aislar Canal Verde", "Aislar Canal Azul"
+            "Sepia", "Escala de Grises", "Invertir", "Espejo", "Binario con Umbral", "Aislar Canal Rojo", "Aislar Canal Verde", "Aislar Canal Azul", "México"
         };
 
         public FormImageFilters()
@@ -94,9 +94,9 @@ namespace ChangeIt
             DisplayImage(e.bmap, 2);
             btnApplyFilter.Enabled = true;
             btnSaveImage.Enabled = true;
-            modifyRGB.getHistogram(e.bmap, 'r', 2);
-            modifyRGB.getHistogram(e.bmap, 'g', 2);
-            modifyRGB.getHistogram(e.bmap, 'b', 2);
+            modifyRGB.getLockBitsHistogram(e.bmap, 'r', 2);
+            modifyRGB.getLockBitsHistogram(e.bmap, 'g', 2);
+            modifyRGB.getLockBitsHistogram(e.bmap, 'b', 2);
             
 
             MessageBox.Show("Filtro aplicado");
@@ -132,9 +132,9 @@ namespace ChangeIt
                 DisplayImage(newFile, 1);
                 originalFile = new Bitmap(newFile);
 
-                modifyRGB.getHistogram(originalFile, 'r', 1);
-                modifyRGB.getHistogram(originalFile, 'b', 1);
-                modifyRGB.getHistogram(originalFile, 'g', 1);
+                modifyRGB.getLockBitsHistogram(originalFile, 'r', 1);
+                modifyRGB.getLockBitsHistogram(originalFile, 'b', 1);
+                modifyRGB.getLockBitsHistogram(originalFile, 'g', 1);
                 
 
                 chartHistEdited.Series["Red"].Points.Clear();
@@ -150,16 +150,16 @@ namespace ChangeIt
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            modifyRGB.Manipulate(newFile, cbSelectedFilter.SelectedIndex + 1, tbSliderControl.Value);
+            modifyRGB.ManipulateLockBits(newFile, cbSelectedFilter.SelectedIndex + 1, tbSliderControl.Value);
         }
 
         private void btnResetImage_Click(object sender, EventArgs e)
         {
             newFile = new Bitmap(originalFile);
 
-            modifyRGB.getHistogram(originalFile, 'r', 3);
-            modifyRGB.getHistogram(originalFile, 'b', 3);
-            modifyRGB.getHistogram(originalFile, 'g', 3);           
+            modifyRGB.getLockBitsHistogram(originalFile, 'r', 3);
+            modifyRGB.getLockBitsHistogram(originalFile, 'b', 3);
+            modifyRGB.getLockBitsHistogram(originalFile, 'g', 3);           
 
             DisplayImage(newFile, 1);
             DisplayImage(newFile, 2);
@@ -188,6 +188,11 @@ namespace ChangeIt
         private void tbSliderControl_ValueChanged(object sender, EventArgs e)
         {
             lbControlSliderVal.Text = tbSliderControl.Value.ToString();
+        }
+
+        private void FormImageFilters_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
