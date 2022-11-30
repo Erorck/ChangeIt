@@ -11,10 +11,13 @@ namespace ChangeIt
     class FileOperations
     {
         Bitmap newImage;
+        string fileName;
+
+        public bool InvokeRequired { get; private set; }
 
         //Open file and make a new bitmap
 
-        public Bitmap OpenFile()
+        public Bitmap OpenImageFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
 
@@ -55,6 +58,25 @@ namespace ChangeIt
                 MessageBox.Show("Imagen guardada exitosamente en el directorio " + sfd.FileName);
 
             }
+
+        }
+
+       
+
+        public string OpenVideoFile()
+        {
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.InitialDirectory = "C:\\Downloads";
+            ofd.Filter = "videos| *.mp4; *.mkv; *.mov";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                fileName = ofd.FileName;
+            }
+
+            return fileName;
 
         }
     }

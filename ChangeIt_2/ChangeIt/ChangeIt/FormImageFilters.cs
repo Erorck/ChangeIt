@@ -23,7 +23,7 @@ namespace ChangeIt
 
         public string[] FilterList =
         {
-            "Sepia", "Escala de Grises", "Invertir", "Espejo", "Binario con Umbral", "Aislar Canal Rojo", "Aislar Canal Verde", "Aislar Canal Azul", "México"
+            "Sepia", "Escala de Grises", "Invertir", "Binario con Umbral", "Aislar Canal Rojo", "Aislar Canal Verde", "Aislar Canal Azul", "México", "Espejo"
         };
 
         public FormImageFilters()
@@ -126,7 +126,7 @@ namespace ChangeIt
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            newFile = getFile.OpenFile();
+            newFile = getFile.OpenImageFile();
             if (newFile != null)
             {
                 DisplayImage(newFile, 1);
@@ -173,7 +173,7 @@ namespace ChangeIt
         private void cbSelectedFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnApplyFilter.Enabled = true;
-            if (cbSelectedFilter.SelectedIndex == 4)
+            if (cbSelectedFilter.SelectedIndex == 3)
             {
                 tbSliderControl.Enabled = true;
                 lbControlSliderDes.Text = "Umbral";

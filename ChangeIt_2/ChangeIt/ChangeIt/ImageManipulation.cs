@@ -110,9 +110,17 @@ namespace ChangeIt
         {
             Bitmap bmap = (Bitmap)bmp;
 
+             if(selectedFilter == 9){
+                Bitmap mBmap = mirrorImage(bmap);
+                OnImageFinished(mBmap);
+                bmap = mBmap;
+                return;
+            }
+
             unsafe
             {
                 BitmapData bitmapData = bmap.LockBits(new Rectangle(0, 0, bmap.Width, bmap.Height), ImageLockMode.ReadWrite, bmap.PixelFormat);
+               
 
                 //Define Variables for bytes per pixel, as ewll as Image Widht and Height
                 int bytesPerPixel = Bitmap.GetPixelFormatSize(bmap.PixelFormat) / 8;
@@ -163,39 +171,39 @@ namespace ChangeIt
                                         break;
                                     }
 
-                                case 4:
-                                    {
-                                        bmap.UnlockBits(bitmapData);
-                                        Bitmap mBmap = mirrorImage(bmap);
-                                        OnImageFinished(mBmap);
-                                        bmap = mBmap;
-                                        return;
-                                    }
+                                //case 4:
+                                //    {
+                                //        bmap.UnlockBits(bitmapData);
+                                //        Bitmap mBmap = mirrorImage(bmap);
+                                //        OnImageFinished(mBmap);
+                                //        bmap = mBmap;
+                                //        return;
+                                //    }
 
-                                case 5:
+                                case 4:
                                     {
                                         theNewColor = turnBinary(theColor, extra);
                                         break;
                                     }
 
-                                case 6:
+                                case 5:
                                     {
                                         theNewColor = turnOneColorChannel(theColor, 'R');
                                         break;
                                     }
 
-                                case 7:
+                                case 6:
                                     {
                                         theNewColor = turnOneColorChannel(theColor, 'G');
                                         break;
                                     }
 
-                                case 8:
+                                case 7:
                                     {
                                         theNewColor = turnOneColorChannel(theColor, 'B');
                                         break;
                                     }
-                                case 9:
+                                case 8:
                                     {
                                         theNewColor = turnMexico(theColor);
                                         break;

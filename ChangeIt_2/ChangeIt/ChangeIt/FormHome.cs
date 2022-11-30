@@ -126,7 +126,8 @@ namespace ChangeIt
 
         private void btnChangeIt_Click(object sender, EventArgs e)
         {
-            currentChildForm.Close();
+            if (currentChildForm != null)
+                    currentChildForm.Close();
             Reset();
         }
 
