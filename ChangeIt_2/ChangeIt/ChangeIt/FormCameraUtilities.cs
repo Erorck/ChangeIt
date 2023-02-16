@@ -28,18 +28,19 @@ namespace ChangeIt
         private VideoCaptureDevice selectedDevice;
         private int newSelectedIndex = -1;
         private int oldSelectedIndex = -1;
-        private bool enableSaveImage = false;
-        private bool enableDetectFaces = false;
+        private static bool enableSaveImage = false;
+        private static bool enableDetectFaces = false;
 
         List<Mat> trainedFaces = new List<Mat>();
         List<int> personLabels = new List<int>();
         List<string> PersonsNames = new List<string>();
         EigenFaceRecognizer recognizer;
         private static bool isTrained = false;
+        private static bool isClosing = false;
 
+        static string myFileName = Path.Combine(System.Windows.Forms.Application.StartupPath, "haarcascade_frontalface_alt.xml");
 
-
-        CascadeClassifier faceCascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt.xml");
+        CascadeClassifier faceCascadeClassifier = new CascadeClassifier(myFileName);
         #endregion
 
         public FormCameraUtilities()
@@ -51,6 +52,7 @@ namespace ChangeIt
         {
             LoadDevicesList();
             btnTurnOn.Enabled = false;
+            isClosing = false;
         }
 
 
@@ -66,9 +68,9 @@ namespace ChangeIt
         public void LoadDevicesList()
         {
             myDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if(myDevices.Count > 0)
+            if (myDevices.Count > 0)
             {
-                for(int i=0; i<myDevices.Count; i++)
+                for (int i = 0; i < myDevices.Count; i++)
                 {
                     cbSelectedDevice.Items.Add(myDevices[i].Name.ToString());
                 }
@@ -76,7 +78,7 @@ namespace ChangeIt
             }
             else
             {
-            }            
+            }
         }
 
 
@@ -105,7 +107,7 @@ namespace ChangeIt
                 //Video Capture
                 selectedDevice = new VideoCaptureDevice(deviceName);
 
-                selectedDevice.NewFrame +=  new NewFrameEventHandler(Capturing);
+                selectedDevice.NewFrame += new NewFrameEventHandler(Capturing);
                 btnDetectFaces.Enabled = true;
 
                 selectedDevice.Start();
@@ -121,6 +123,9 @@ namespace ChangeIt
 
         private void Capturing(object sender, NewFrameEventArgs eventArgs)
         {
+            if (isClosing)
+                return;
+
             //Clone the frame
             Bitmap currentFrame = (Bitmap)eventArgs.Frame.Clone();
 
@@ -135,14 +140,15 @@ namespace ChangeIt
 
             Rectangle[] faces = faceCascadeClassifier.DetectMultiScale(grayImage, 1.1, 3, Size.Empty, Size.Empty);
 
-            ThreadSafe(() =>
-            {
+            
+             ThreadSafe(() =>
+             {
                 if (selectedDevice != null && selectedDevice.IsRunning)
                     UpdateDetectionControls(faces.Length); //Código que modifica controles creados en el hilo principal
                 else
-                ResetDetectionControls();
+                    ResetDetectionControls();
             }, this);  //this si estas en la clase del formulario principal
-
+            
 
             //If faces detected
             if (faces.Length > 0)
@@ -171,16 +177,14 @@ namespace ChangeIt
                             Directory.CreateDirectory(path);
 
 
-                        //Save 10 images with delay a second for each image
+                        //Save image
                         ThreadSafe(() =>
-                        {
-                            for (int i = 0; i < 1; i++)
-                            {
+                        {                       
                                 //resize the image to save it
                                 resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + tbPersonName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss") + ".jpg");
                                 Thread.Sleep(1000);
-                            }
-                           
+                                tbPersonName.Text = "";                            
+
                         }, this);
 
                     }
@@ -192,7 +196,7 @@ namespace ChangeIt
                         Image<Gray, Byte> grayFaceResult = resultImage.Convert<Gray, byte>().Resize(200, 200, Inter.Cubic);
                         //CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);
                         var result = recognizer.Predict(grayFaceResult);
-                        if(result.Label != -1 && result.Distance < 2000)
+                        if (result.Label != -1 && result.Distance < 2000)
                         {
                             CvInvoke.PutText(currentFrameCV, PersonsNames[result.Label], new Point(face.X - 1, face.Y - 2),
                                 FontFace.HersheyComplex, 1.0, new Bgr(Color.Yellow).MCvScalar);
@@ -223,7 +227,7 @@ namespace ChangeIt
             if (currentFrameCV != null)
             {
                 currentFrameCV.Dispose();
-                currentFrame.Dispose();                
+                currentFrame.Dispose();
             }
         }
         #endregion
@@ -249,7 +253,7 @@ namespace ChangeIt
 
                 string[] files = Directory.GetFiles(path, "*.jpg", SearchOption.AllDirectories);
 
-                if(files.Length <= 0)
+                if (files.Length <= 0)
                 {
                     MessageBox.Show("There are no Images to Analyze, save a face");
                     return false;
@@ -299,6 +303,8 @@ namespace ChangeIt
         private void ThreadSafe(Action callback, Form form)
         {
             BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerSupportsCancellation = true;           
+
             worker.RunWorkerCompleted += (obj, e) =>
             {
                 if (form.InvokeRequired)
@@ -317,19 +323,14 @@ namespace ChangeIt
         private void ResetDetectionControls()
         {
             lblDetectedUsers.Text = "No video entry";
-            lblDetectedMovingUsers.Text = "No video entry";
             btnDetectFaces.Enabled = false;
         }
 
-        private void FormCameraUtilities_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            CloseCurrentDevice();
-        }
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
-            btnSave.Enabled = true;
             enableDetectFaces = !enableDetectFaces;
+            btnSave.Enabled = enableDetectFaces;
             //btnDetectFaces.Enabled = false;
             enableSaveImage = false;
             pbDetected.Image = null;
@@ -337,6 +338,12 @@ namespace ChangeIt
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (tbPersonName.Text.Length == 0)
+            {
+                MessageBox.Show("Ingrese un nombre para la persona");
+                return;
+            }
+
             btnSave.Enabled = true;
             //btnDetectFaces.Enabled = false;
             enableSaveImage = true;
@@ -349,6 +356,22 @@ namespace ChangeIt
             //{
             //    btnAnalyze.Enabled = false;
             //}
+        }
+
+        private void FormCameraUtilities_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            isClosing = true;
+            CloseCurrentDevice();
+            enableSaveImage = false;
+            enableDetectFaces = false;
+            isTrained = false;
+
+        }
+
+        private void FormCameraUtilities_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CloseCurrentDevice();
         }
     }
 }

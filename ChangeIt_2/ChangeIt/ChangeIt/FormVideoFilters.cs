@@ -285,5 +285,11 @@ namespace ChangeIt
                 PlayVideo();
             }
         }
+
+        private void FormVideoFilters_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            isPlaying = false;
+            activeFilter = -1;
+        }
     }
 }
